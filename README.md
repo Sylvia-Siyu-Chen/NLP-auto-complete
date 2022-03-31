@@ -1,10 +1,10 @@
 # Email Auto-Complete Project 
 
 ### Team Member: 
-- Paper Composition: James Jiang
-- Programming and/or Software Development: [Sylvia Chen](https://github.com/Sylvia-Siyu-Chen) , Ning Yang
-- theoretical issues (cs, math, linguistics): James Jiang, [Sylvia Chen](https://github.com/Sylvia-Siyu-Chen)
-- Evaluation: Ning Yang, Shanshan Gong
+- Paper Composition: [James Jiang](https://github.com/yj1412)
+- Programming and/or Software Development: [Sylvia Chen](https://github.com/Sylvia-Siyu-Chen) , [Ning Yang](https://github.com/yj1412)
+- theoretical issues (cs, math, linguistics): [James Jiang](https://github.com/yj1412), [Sylvia Chen](https://github.com/Sylvia-Siyu-Chen)
+- Evaluation: [Ning Yang](https://github.com/yj1412), Shanshan Gong
 
 ### Problem Statement: 
 Inspired by our school Gmail, which is able to auto-fill many common sentences when writing emails, we want to analyze different algorithms that are able to fulfill similar and even more profound functions in writing compositions of all kinds. We will set up evaluation metrics and run all models to find out what factors affect the correctness of soundness, semantics, and sentiments of the given texts the most. If time permits, we want to build up an algorithm that is able to give accurate autofill suggestions for replier, based on the context of sender’s email (i.e. if the mood of the email is negative, when the user is typing “I feel”, the algorithm will suggest to type “sorry about your”).
