@@ -1,0 +1,5 @@
+1. extract sent emails into one corpus
+2. draw a random sample with 20% testing. the rest training 80%
+3. 3-gram, TFIDF
+4. test and evaluate through ####
+5. possible F score, recall, precision, accuracy
