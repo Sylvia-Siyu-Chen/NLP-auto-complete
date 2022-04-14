@@ -7,14 +7,17 @@ import os
 from dotenv import load_dotenv
 from expects import be_true, equal, expect
 # this project
-from neurotic.nlp.autocomplete import NGrams, Tokenizer, TrainTestSplit
+
+import modulefinder
+
+from ngram.Ngram import NGrams 
 
 load_dotenv("posts/nlp/.env", override=True)
 
 
-path = os.environ["TWITTER_AUTOCOMPLETE"]
-with open(path) as reader:
-    data = reader.read()
+# path = os.environ["TWITTER_AUTOCOMPLETE"]
+# with open(path) as reader:
+#     data = reader.read()
 
 def estimate_probability(word,
                          previous_n_gram,
