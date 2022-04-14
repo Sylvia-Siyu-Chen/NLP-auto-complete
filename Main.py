@@ -16,22 +16,33 @@ path = os.environ["TWITTER_AUTOCOMPLETE"]
 with open(path) as reader:
     data = reader.read()
 
+def estimate_probability(word,
+                         previous_n_gram,
+                         n_gram_counts,
+                         n_plus1_gram_counts,
+                         vocabulary_size,
+                         k) :
+    """
+    Estimate the probabilities of a next word using the n-gram counts with k-smoothing
 
-def estimate_probability(word: str,
-                        previous_n_gram: tuple, 
-                        n_gram_counts: dict,
-                        n_plus1_gram_counts: dict,
-                        vocabulary_size: int,
-                        k: float=1.0) -> float:
+    Args:
+       word: next word
+       previous_n_gram: A sequence of words of length n
+       n_gram_counts: Dictionary of counts of n-grams
+       n_plus1_gram_counts: Dictionary of counts of (n+1)-grams
+       vocabulary_size: number of words in the vocabulary
+       k: positive constant, smoothing parameter
 
-
-
+    Returns:
+       A probability
+    """
     previous_n_gram = tuple(previous_n_gram)
     previous_n_gram_count = n_gram_counts.get(previous_n_gram, 0)
 
     n_plus1_gram = previous_n_gram + (word,)  
     n_plus1_gram_count = n_plus1_gram_counts.get(n_plus1_gram, 0)       
     return (n_plus1_gram_count + k)/(previous_n_gram_count + k * vocabulary_size)
+
 
 def estimate_probabilities(previous_n_gram, n_gram_counts, n_plus1_gram_counts, vocabulary, k=1.0):
     """
