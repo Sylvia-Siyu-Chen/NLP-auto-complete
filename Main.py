@@ -1,23 +1,36 @@
 # python
 from itertools import chain
 import math
+
 import os
 
 # pypi
 from dotenv import load_dotenv
 from expects import be_true, equal, expect
+import csv 
 # this project
 
 import modulefinder
 
 from ngram.Ngram import NGrams 
 
-load_dotenv("posts/nlp/.env", override=True)
+# load_dotenv("posts/nlp/.env", override=True)
 
 
-# path = os.environ["TWITTER_AUTOCOMPLETE"]
-# with open(path) as reader:
-#     data = reader.read()
+# path = os.environ["train.csv"]
+
+file = open("/Users/sylv/Desktop/coding/NLP-auto-complete/data/train.csv", "r")
+csv_reader = csv.reader(file)
+
+lists_from_csv = []
+vocabulary = []
+for row in csv_reader:
+    lists_from_csv.append(row)
+    for word in row:
+        vocabulary.append(word.strip("\n./\}{+-?><!@#$,%^&*()~`"))
+
+# print(lists_from_csv)
+
 
 def estimate_probability(word,
                          previous_n_gram,
@@ -154,27 +167,30 @@ def suggest_a_word(previous_tokens, n_gram_counts, n_plus1_gram_counts, vocabula
 
 
 
-sentences = [['i', 'like', 'a', 'cat'],
-             ['this', 'dog', 'is', 'like', 'a', 'cat']]
-unique_words = list(set(sentences[0] + sentences[1]))
 
-unigram_counts = NGrams(sentences, 1).counts
-bigram_counts = NGrams(sentences, 2).counts
+unique_words = list(set(vocabulary))
 
-previous_tokens = ["i", "like"]
+print(unique_words)
+
+unigram_counts = NGrams(data=lists_from_csv, n=1).counts
+bigram_counts = NGrams(data=lists_from_csv,n=2).counts
+
+previous_tokens = ["how", "are"]
 word, probability = suggest_a_word(previous_tokens, unigram_counts, bigram_counts, unique_words, k=1.0)
-print(f"The previous words are 'i like',\n\tand the suggested word is `{word}` with a probability of {probability:.4f}")
-expected_word, expected_probability = "a", 0.2727
-expect(word).to(equal(expected_word))
-expect(math.isclose(probability, expected_probability, abs_tol=1e-4)).to(be_true)
+print(f"The previous words are {previous_tokens},\n\tand the suggested word is `{word}` with a probability of {probability:.4f}")
+
+# expected_word, expected_probability = "a", 0.2727
+# expect(word).to(equal(expected_word))
+# expect(math.isclose(probability, expected_probability, abs_tol=1e-4)).to(be_true)
 print()
 
 # test your code when setting the starts_with
-tmp_starts_with = 'c'
-word, probability = suggest_a_word(previous_tokens, unigram_counts, bigram_counts, unique_words, k=1.0, start_with=tmp_starts_with)
-print(f"The previous words are 'i like', the suggestion must start with `{tmp_starts_with}`\n\tand the suggested word is `{word}` with a probability of {probability:.4f}")
 
-expected_word, expected_probability = "cat", 0.0909
-expect(word).to(equal(expected_word))
-expect(math.isclose(probability, expected_probability, abs_tol=1e-4)).to(be_true)
+# tmp_starts_with = 'c'
+# word, probability = suggest_a_word(previous_tokens, unigram_counts, bigram_counts, unique_words, k=1.0, start_with=tmp_starts_with)
+# print(f"The previous words are 'i like', the suggestion must start with `{tmp_starts_with}`\n\tand the suggested word is `{word}` with a probability of {probability:.4f}")
+
+# expected_word, expected_probability = "cat", 0.0909
+# expect(word).to(equal(expected_word))
+# expect(math.isclose(probability, expected_probability, abs_tol=1e-4)).to(be_true)
 

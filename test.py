@@ -1,6 +1,6 @@
 import os
 
-directory = r'/Users/student/Desktop/maildir'
+directory = r'/Users/sylv/Desktop/coding/NLP-auto-complete/maildir'
 start = False
 sentences_l = []
 single_s = []
@@ -13,19 +13,18 @@ for root, subdirs, files in os.walk(directory):
 
             for item in content:
                 if '. ' in item:
-                    item = item.strip().replace('\t', '').replace('?', '').replace('/',' ')
+                    item = item.strip().replace('\t', '').replace('?', '').replace('/','')
                     item = item.split('. ')
-                    print(item)
+                    if((item[0].split("-")[0] != 'X') & (item[0].split(":")[0]!="To")):
+                        print(item)
+                        for sentence in item:
+                            words = sentence.replace('.', '').split(' ')
+                            for w in words:
+                                if (w != '') and (w not in '!@#$%^&*()[]}{;:,./<>?\|`~-=_+'):
+                                    single_s.append(w)
 
-                    for sentence in item:
-                        words = sentence.replace('.', '').split(' ')
-
-                        for w in words:
-                            if (w != '') and (w not in '!@#$%^&*()[]{};:,./<>?\|`~-=_+'):
-                                single_s.append(w)
-
-                        sentences_l.append(single_s)
-                        single_s = []
+                            sentences_l.append(single_s)
+                            single_s = []
 
 train_n = int(0.8 * len(sentences_l))
 train_set = sentences_l[:train_n]
