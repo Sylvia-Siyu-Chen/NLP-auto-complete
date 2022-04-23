@@ -3,6 +3,8 @@ from fileinput import filename
 import imp
 import os
 from email.parser import Parser
+from nltk.tokenize import word_tokenize
+from nltk import pos_tag
 
 
 rootdir = "/Users/sylv/Desktop/coding/NLP-auto-complete/maildir"
@@ -23,7 +25,6 @@ for dir, subdir, fnames in os.walk(rootdir):
                     email_body.append(email.get_payload())
 
 
-
 total_sentences = []
 
 for item in email_body:
@@ -40,9 +41,18 @@ with open("train.csv","w") as w:
     for sentence in total_sentences:
         firstword = sentence.split(" ")[0]
         if (sentence != "") & (":" not in sentence) & ("@" not in sentence) &("---" not in sentence):
-            w.write(sentence+"\n")
+                words = word_tokenize(sentence)
+                result = pos_tag(words)
+                for s in result:
+                    for element in s:
+                            w.write(str(element))
+                            w.write('\t')
+                    w.write('\n')
     w.close()
             
+
+
+
 
 
 # email = Parser().parsestr(data)

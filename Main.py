@@ -27,7 +27,7 @@ vocabulary = []
 for row in csv_reader:
     lists_from_csv.append(row)
     for word in row:
-        vocabulary.append(word.strip("\n./\}{+-?><!@#$,%^&*()~`"))
+        vocabulary.append(word.strip("\n./\}{+-?><!@#$,%^&*()~` "))
 
 # print(lists_from_csv)
 
@@ -170,10 +170,12 @@ def suggest_a_word(previous_tokens, n_gram_counts, n_plus1_gram_counts, vocabula
 
 unique_words = list(set(vocabulary))
 
-print(unique_words)
+# print(unique_words)
 
 unigram_counts = NGrams(data=lists_from_csv, n=1).counts
 bigram_counts = NGrams(data=lists_from_csv,n=2).counts
+
+print(unigram_counts)
 
 previous_tokens = ["how", "are"]
 word, probability = suggest_a_word(previous_tokens, unigram_counts, bigram_counts, unique_words, k=1.0)

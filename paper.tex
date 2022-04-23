@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+
+\title{NLP Group1}
+\author{yj1412 }
+\date{April 2022}
+\maketitle
+
+\begin{document}
+\begin{multicols}{2}
+\begin{abstract}
+
+In this research paper, we will apply training corpus (Enron email dataset) to train N-gram model. Then, we employ the model to auto-fill the sentences, given the first two words provided. Apart from this goal, we will also apply BLEU as our evaluation metrics to find out what factors affect the correctness of soundness, semantics, and sentiments of the given texts the most. If time permits, we want to build up an algorithm that is able to give accurate auto-fill suggestions for repliers, based on the context of sender’s email (i.e. if the mood of the email is negative, when the user is typing “I feel”, the algorithm will suggest to type “sorry about your”).
+
+   
+\end{abstract}
+
+
+\section{Introduction}
+this is an introduction
+\section{Overview}
+
+\section{Methodology}
+Firstly, we downloaded the Enron Email Dataset in .txt form. We use an algorithm to extract the both sent and replied email texts into one corpus. After that, we draw a random sample with 20 percent of texts used for testing, and the rest 80 percent for training. We decide to use trigram to evaluate the texts, and apply BLEU for evaluation metrics. Possible F score, recall, precision, and accuracy will also be included in our performance metrics.
+
+After we obtained a general idea of the email text files, we realized that each of the files consist of a subject, sender and receiver, one or few body paragraphs, as well as multiple lines of trivial information. Since the focus of our research is on the content of each email, we traverse through each .txt file, extracting only the body paragraphs. Because some of the files contain a sent and a reply section, we spent some time trying to obtaining all of the body paragraphs without any additional information.
+
+Each email is a document, and we extract sentences from it. Then, we will use nltk to tag pos for each word in each sentence. In addition, for each word, we will calculate the likelihood probability and transition probability depending on two words ahead of it. Next, by using the tri-gram matrix, we predict and complete a sentence by knowing the first two words. At last, we use the trained model to test the rest of the data.
+
+\section{Experiment}
+
+\section{Results&Analysis}
+
+\end{multicols}
+\end{document}
